@@ -1,13 +1,13 @@
 "use client";
 import { useFormState } from "react-dom";
-import { Button, divider } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import * as actions from "@/actions";
 
-interface PostCreateFormProps {
+interface DeleteTopicProps {
   slug: string;
 }
 
-export default function DeleteTopic({ slug }: PostCreateFormProps) {
+export default function DeleteTopic({ slug }: DeleteTopicProps) {
   const [formState, action] = useFormState(
     actions.deleteTopic.bind(null, slug),
     { errors: {} }
