@@ -1,5 +1,8 @@
 import PostCreateForm from "@/components/posts/post-create-form";
+import PostList from "@/components/posts/post-list";
+import { getPostsByTopicSlug } from "@/db/queries/posts";
 import DeleteTopic from "@/components/topics/delete-topic";
+
 interface TopicShowPageProps {
   params: {
     slug: string;
@@ -16,6 +19,7 @@ export default function TopicShowPage({ params }: TopicShowPageProps) {
         <div className="inline-block w-2">
           <DeleteTopic slug={slug} />
         </div>
+        <PostList fetchData={() => getPostsByTopicSlug(slug)} />
       </div>
       <div>
         <PostCreateForm slug={slug} />
