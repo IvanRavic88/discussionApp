@@ -9,6 +9,19 @@ export type PostWithData = Post & {
   _count: { comments: number };
 };
 
+export function fetchPostBySearchTerm(term: string): Promise<PostWithData[]> {
+  return db.post.findMany({
+    include: {
+      topic: { select: { slug: true } },
+      user: { select: { name: true, image: true } },
+      _count: { select: { comments: true } },
+    },
+    where: {
+      OR: [{ title: { contains: term } }, { content: { contains: term } }],
+    },
+  });
+}
+
 // second way to do define the type
 // export type PostWithData = Awaited<
 //   ReturnType<typeof fetchPostsByTopicSlug>
